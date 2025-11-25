@@ -13,6 +13,7 @@ import { globalErrorHandler, notFound } from './utils/errorHandler.js';
 // Import routes
 import authRoutes from './api/routes/AuthRoute.js';
 import patientRoutes from './api/routes/PatientRoute.js';
+import appointmentRoutes from './api/routes/AppointmentRoute.js';
 
 // Load environment variables
 config();
@@ -77,6 +78,7 @@ app.get('/health', (req, res) => {
 // API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/patients', patientRoutes);
+app.use('/api/appointments', appointmentRoutes);
 
 // Welcome route
 app.get('/', (req, res) => {
