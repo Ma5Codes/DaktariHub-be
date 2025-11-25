@@ -2,8 +2,8 @@
 import { Appointment } from '../models/Appointment.js';
 import { Doctor } from '../models/Doctor.js';
 import { Patient } from '../models/Patient.js';
-import { ApiResponse } from '../utils/apiResponse.js';
-import { asyncHandler } from '../utils/errorHandler.js';
+import { ApiResponse } from '../../utils/apiResponse.js';
+import { asyncHandler } from '../../utils/errorHandler.js';
 import mongoose from 'mongoose';
 
 export class AppointmentController {

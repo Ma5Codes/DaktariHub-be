@@ -1,12 +1,12 @@
 // routes/AppointmentRoute.js
 import { Router } from 'express';
 import { AppointmentController } from '../controllers/AppointmentController.js';
-import { authenticateToken } from '../middleware/auth.js';
+import { authenticate } from '../../middleware/auth.js';
 
 const router = Router();
 
 // Apply authentication middleware to all routes
-router.use(authenticateToken);
+router.use(authenticate);
 
 // Create new appointment (patients only)
 router.post(
