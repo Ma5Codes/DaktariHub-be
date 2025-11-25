@@ -10,7 +10,7 @@ const doctorSchema = new mongoose.Schema({
   doctorId: {
     type: String,
     unique: true,
-    required: [true, 'Doctor ID is required']
+    required: false // Will be set by pre-save hook
   },
   specialization: {
     type: String,

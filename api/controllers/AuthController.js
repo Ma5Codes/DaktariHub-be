@@ -36,12 +36,38 @@ export class AuthController {
       role
     });
 
-    // Create role-specific profile
+    // Create role-specific profile with minimal required data
     let profile = null;
     if (role === 'patient') {
-      profile = await Patient.create({ user: user._id });
+      // Create new patient instance and let pre-save hook generate patientId
+      profile = new Patient({ 
+        user: user._id,
+        dateOfBirth: new Date('2000-01-01'), // Default date - to be updated
+        gender: 'Other', // Default - to be updated
+        phoneNumber: '+1234567890', // Default - to be updated
+        emergencyContact: {
+          name: 'Not provided',
+          relationship: 'Not provided',
+          phoneNumber: '+1234567890'
+        }
+      });
+      await profile.save(); // This will trigger the pre-save hook to generate patientId
     } else if (role === 'doctor') {
-      profile = await Doctor.create({ user: user._id });
+      // Create new doctor instance with default values for required fields
+      profile = new Doctor({ 
+        user: user._id,
+        specialization: 'General Practice', // Default - to be updated
+        qualification: 'MD', // Default - to be updated
+        experience: 0, // Default - to be updated
+        consultationFee: 100, // Default - to be updated
+        phoneNumber: '+1234567890', // Default - to be updated
+        availability: [{
+          day: 'Monday',
+          startTime: '09:00',
+          endTime: '17:00'
+        }] // Default availability - to be updated
+      });
+      await profile.save(); // This will trigger the pre-save hook to generate doctorId
     }
 
     // Generate tokens

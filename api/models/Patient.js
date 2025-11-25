@@ -10,7 +10,7 @@ const patientSchema = new mongoose.Schema({
   patientId: {
     type: String,
     unique: true,
-    required: [true, 'Patient ID is required']
+    required: false // Will be set by pre-save hook
   },
   dateOfBirth: {
     type: Date,
